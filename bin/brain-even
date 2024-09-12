@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+
+<?php
+
+    $autoloadPath1 = __DIR__ . '/../../../autoload.php';
+    $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+    if (file_exists($autoloadPath1)) {
+        require_once $autoloadPath1;
+    } else {
+        require_once $autoloadPath2;
+    }
+
+    use function cli\line;
+    use function cli\prompt;
+
+    line('Welcome to the Brain Game!');
+    $name = prompt('May I have your name?');
+    line("Hello, %s!", $name);
+    line('Answer "yes" if the number is even, otherwise answer "no".');
+    $rend = [];
+    for ($i = 0; $i < 3; $i++) {
+        $rend[] = rand(0, 15);
+    }
+    foreach ($rend as $item) {
+        line("Question: ". $item);
+        $tru = $item % 2 === 0? 'yes' : 'no'; 
+        $answer = prompt("Your answer: ");
+        if($answer !== $tru) {
+            line("'{$answer}' is wrong answer ;(. Correct answer was '{$tru}'.");
+            line("Let's try again, {$name}!");
+            break;
+        }
+        line("Correct!");
+        line("Congratulations, {$name}!");
+    }
+    
