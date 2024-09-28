@@ -39,7 +39,7 @@ use Random\Engine;
                     break;                           
             }
             line("Question: {$item[0]} {$item[1]} {$item[2]}");
-            $answer = prompt("Your answer: ");
+            $answer = prompt("Your answer");
             if((int)$answer !== (int)$result) {
                 line("'{$answer}' is wrong answer ;(. Correct answer was '{$result}'.");
                 line("Let's try again, {$name}!");
