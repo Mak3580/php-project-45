@@ -20,6 +20,7 @@ use Random\Engine;
     $name = hi();
     function calc($name)
     {
+        line('What is the result of the expression?');
         $rend = [];
         $operations = ['+', '-', '*'];
         for ($i = 0; $i < 3; $i++) {
