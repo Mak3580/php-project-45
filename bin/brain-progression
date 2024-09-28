@@ -19,6 +19,7 @@
     function progression()
     {
         $name = hi();
+        line('What number is missing in the progression?');
         for( $j = 0; $j < 3; $j++ ) {
             $start = rand(0, 20);
             $rend[] = $start;
