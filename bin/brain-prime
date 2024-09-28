@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+
+<?php
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+use function cli\line;
+use function cli\prompt;
+
+require_once(__DIR__.'/../src/Engine.php');
+use function Brain\Engine\hi;
+
+function primeCheck($number)
+{
+    if ($number == 1)
+    return false;
+    
+    for ($i = 2; $i <= sqrt($number); $i++){
+        if ($number % $i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+function prime()
+{
+    $name = hi();
+    for ($i = 0; $i < 3; $i++){
+        line('Answer "yes" if given number is prime. Otherwise answer "no".');
+        $rand = rand(0, 15);
+        line("Question: {$rand}");
+        $answer = prompt("Your answer");
+        $true = primeCheck($rand) ? 'yes' : 'no';
+        if($answer !== $true) {
+            line("'{$answer}' is wrong answer ;(. Correct answer was '{$tru}'.");
+            line("Let's try again, {$name}!");
+            return;
+        }
+        line("Correct!");
+    }
+    line("Congratulations, {$name}!");
+}
+prime();
