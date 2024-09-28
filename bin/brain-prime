@@ -38,7 +38,7 @@ function prime()
         $answer = prompt("Your answer");
         $true = primeCheck($rand) ? 'yes' : 'no';
         if($answer !== $true) {
-            line("'{$answer}' is wrong answer ;(. Correct answer was '{$tru}'.");
+            line("'{$answer}' is wrong answer ;(. Correct answer was '{$true}'.");
             line("Let's try again, {$name}!");
             return;
         }
