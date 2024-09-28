@@ -35,7 +35,7 @@
         foreach ($rend as $item) {
             line("Question: {$item[0]} {$item[1]}");
             $tru = gcd($item[0], $item[1]);
-            $answer = prompt("Your answer: ");
+            $answer = prompt("Your answer");
             line("Correct!");
             if((int)$answer !== (int)$tru) {
                 line("'{$answer}' is wrong answer ;(. Correct answer was '{$tru}'.");
