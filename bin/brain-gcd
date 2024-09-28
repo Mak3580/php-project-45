@@ -27,7 +27,7 @@
     function gcdGame()
     {
         $name = hi();
-        line('Answer "yes" if the number is even, otherwise answer "no".');
+        line('Find the greatest common divisor of given numbers.');
         $rend = [];
         for ($i = 0; $i < 3; $i++) {
             $rend[] = [rand(0, 100), rand(0, 100)];
