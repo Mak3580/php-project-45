@@ -12,28 +12,37 @@
 
     use function cli\line;
     use function cli\prompt;
+
     require_once(__DIR__.'/../src/Engine.php');
     use function Brain\Engine\hi;
 
-    function even()
+    function gcd($n, $m) {
+        if($m > 0) {
+            return gcd($m, $n % $m);
+        } else {
+            return abs($n);
+        }
+    }
+
+    function gcdGame()
     {
         $name = hi();
         line('Answer "yes" if the number is even, otherwise answer "no".');
         $rend = [];
         for ($i = 0; $i < 3; $i++) {
-            $rend[] = rand(0, 15);
+            $rend[] = [rand(0, 100), rand(0, 100)];
         }
         foreach ($rend as $item) {
-            line("Question: ". $item);
-            $tru = $item % 2 === 0? 'yes' : 'no'; 
-            $answer = prompt("Your answer");
-            if($answer !== $tru) {
+            line("Question: {$item[0]} {$item[1]}");
+            $tru = gcd($item[0], $item[1]);
+            $answer = prompt("Your answer: ");
+            line("Correct!");
+            if((int)$answer !== (int)$tru) {
                 line("'{$answer}' is wrong answer ;(. Correct answer was '{$tru}'.");
                 line("Let's try again, {$name}!");
                 return;
             }
-            line("Correct!");
         }
         line("Congratulations, {$name}!");
     }
-    even();
+    gcdGame();

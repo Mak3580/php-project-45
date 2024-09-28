@@ -12,28 +12,39 @@
 
     use function cli\line;
     use function cli\prompt;
+
     require_once(__DIR__.'/../src/Engine.php');
     use function Brain\Engine\hi;
 
-    function even()
+    function progression()
     {
         $name = hi();
-        line('Answer "yes" if the number is even, otherwise answer "no".');
-        $rend = [];
-        for ($i = 0; $i < 3; $i++) {
-            $rend[] = rand(0, 15);
-        }
-        foreach ($rend as $item) {
-            line("Question: ". $item);
-            $tru = $item % 2 === 0? 'yes' : 'no'; 
+        for( $j = 0; $j < 3; $j++ ) {
+            $start = rand(0, 20);
+            $rend[] = $start;
+            $sicret = rand(0, 9);
+            $plus = rand(0, 5);
+            for ($i = 0; $i < 9; $i++) {
+                $rend[] = $rend[$i] + $plus;
+            }
+            $question = '';
+            foreach ($rend as $key=>$item) {
+                $question .= $key === $sicret ?'..':$item;
+                $question .= ' ';
+                if ($key === $sicret) {
+                    $tru = $item;
+                }
+            }
+            line("Question: {$question}");
             $answer = prompt("Your answer");
-            if($answer !== $tru) {
+            if((int)$answer !== (int)$tru) {
                 line("'{$answer}' is wrong answer ;(. Correct answer was '{$tru}'.");
                 line("Let's try again, {$name}!");
                 return;
             }
             line("Correct!");
+            $rend = [];
         }
         line("Congratulations, {$name}!");
     }
-    even();
+    progression();

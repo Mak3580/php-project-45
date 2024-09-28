@@ -5,6 +5,14 @@ namespace Brain\Engine;
 use function cli\line;
 use function cli\prompt;
 
+function hi()
+{
+    line('Welcome to the Brain Game!');
+    $name = prompt('May I have your name?');
+    line("Hello, %s!", $name);
+    return $name;
+}
+
 function Hello()
 {
     line('Welcome to the Brain Game!');
@@ -36,7 +44,7 @@ function Hello()
             line("Let's try again, {$name}!");
             break;
         }
-        line("Correct!");
-        line("Congratulations, {$name}!");
     }
+    line("Correct!");
+    line("Congratulations, {$name}!");
 }

@@ -2,7 +2,6 @@
 
 <?php
 use Random\Engine;
-use function Brain\Engine\Hello;
 
     $autoloadPath1 = __DIR__ . '/../../../autoload.php';
     $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
@@ -12,8 +11,42 @@ use function Brain\Engine\Hello;
         require_once $autoloadPath2;
     }
 
+    use function cli\line;
+    use function cli\prompt;
     require_once(__DIR__.'/../src/Engine.php');
 
-    use function Brian\Engine;
+    use function Brain\Engine\hi;
 
-    Hello();
+    $name = hi();
+    function calc($name)
+    {
+        $rend = [];
+        $operations = ['+', '-', '*'];
+        for ($i = 0; $i < 3; $i++) {
+            $rend[] = [rand(0, 15), $operations[rand(0,2)], rand(0, 15)];
+        }
+        foreach ($rend as $item) {
+            $result = 0;
+            switch ($item[1]) {
+                case '+':
+                    $result = $item[0] + $item[2];
+                    break;
+                case '-':
+                    $result = $item[0] - $item[2];
+                    break;
+                case '*':
+                    $result = $item[0] * $item[2];
+                    break;                           
+            }
+            line("Question: {$item[0]} {$item[1]} {$item[2]}");
+            $answer = prompt("Your answer: ");
+            if((int)$answer !== (int)$result) {
+                line("'{$answer}' is wrong answer ;(. Correct answer was '{$result}'.");
+                line("Let's try again, {$name}!");
+                return;
+            }
+            line("Correct!");
+        }
+        line("Congratulations, {$name}!");
+    }
+    calc($name);
